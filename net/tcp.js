@@ -1,0 +1,17 @@
+var net = require('net');
+var server = net.createServer(function(c) {
+    // 'connection' listener
+    console.log('client connected');
+    c.on('end', function() {
+        console.log('client disconnected');
+    });
+    c.write('hello\r\n');
+    c.pipe(c);
+});
+server.on('error', function(err) {
+    throw err;
+});
+// cmd telnet localhost 8124
+server.listen(8124, function() {
+    console.log('server bound');
+});
