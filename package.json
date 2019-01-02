@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "async": "^2.6.1",
     "formidable": "^1.2.1"
   },
   "devDependencies": {},
