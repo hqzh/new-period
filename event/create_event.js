@@ -1,9 +1,14 @@
 var eventEmitter = require("events");
+const fs = require('fs');
 var myEmitter = new eventEmitter();
-myEmitter.on("event",function(){
-    console.log("event");
+
+
+myEmitter.on("getIo",function(res){
+    console.log(res.toString());
 })
-myEmitter.on("event",function(){
-    console.log("event");
+
+fs.readFile('hello.txt',(err,res)=>{
+    myEmitter.emit("getIo",res);
 })
-myEmitter.emit("event");
+
+
