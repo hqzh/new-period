@@ -10,7 +10,9 @@ const server = http.createServer(function (req,res) {
       res.end(data)
     })
   } else {
-    res.end('主页')
+    ejs.renderFile('views/home.ejs',{},function (err,data) {
+      res.end(data)
+    })
   }
 })
 
