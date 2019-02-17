@@ -1,3 +1,5 @@
+const ejs = require('ejs')
+
 const app = {
   login:function (req,res) {
     console.log('login');
