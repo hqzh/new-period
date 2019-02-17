@@ -9,7 +9,8 @@ const server = http.createServer(function (req,res) {
   if (pathname === '/login') {
     ejs.renderFile('views/login.ejs',{
       message:'我是message',
-      list:[1111,2222,3333]
+      list:[1111,2222,3333],
+      el:'<h1>我是h1标签</h1>'
     },function (err,data) {
       res.end(data)
     })
