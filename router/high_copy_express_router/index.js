@@ -1,8 +1,16 @@
-const route = require('./http_route');
-const app = route();
 const http = require('http');
-const server = http.createServer(app);
+const app = require('./express_route');
+const ejs = require('ejs');
 
-app.get('/',function (req,res) {
-  res.send('login')
+
+http.createServer(app).listen(3000);
+
+app.get('/login',function (req,res) {
+  ejs.renderFile('./static/login.ejs',{},function (err,data) {
+    res.send(data)
+  })
+})
+
+app.post('/dologin',function (req,res) {
+  res.send("<script>alert('登录成功')</script>")
 })
