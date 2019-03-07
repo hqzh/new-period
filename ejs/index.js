@@ -1,6 +1,6 @@
 const http = require('http');
 const ejs = require('ejs');
-const url = require('url')
+const url = require('url');
 
 
 const server = http.createServer(function (req,res) {
