@@ -26,6 +26,19 @@ client.connect(function(err) {
 });
   res.send('333')
 })
+app.get('/edit', function (req, res) {
+ // Use connect method to connect to the Server
+client.connect(function(err) {
+  console.log("Connected successfully to server");
+
+  const db = client.db(dbName);
+  db.collection('unique').updateOne({"useid":1},{$set:{"useid":0}},function () {
+    
+  })
+  client.close();
+});
+  res.send('333')
+})
 
 app.listen(3000)
 
