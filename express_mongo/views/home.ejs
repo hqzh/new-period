@@ -7,6 +7,12 @@
   <title>Document</title>
 </head>
 <body>
-  <h1>这是主页</h1>
+  <h1>
+  <ul>
+    <%for(var i=0;i<list.length;i++){%>
+    <li><%=list[i].useid%></li>
+    <%}%>
+  </ul>
+  </h1>
 </body>
 </html>
