@@ -49,6 +49,7 @@ client.connect(function(err) {
   res.send('333')
 })
 
+
 app.get('/edit', function (req, res) {
  // Use connect method to connect to the Server
 client.connect(function(err) {
@@ -83,6 +84,13 @@ client.connect(function(err) {
 });
   res.send('333')
 })
+
+//设置动态路由  
+app.get('/component/:id?', function (req, res) {
+  console.log(req.params)
+  console.log(req.route)
+   res.send('动态路由')
+ })
 
 app.listen(3000)
 
