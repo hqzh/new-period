@@ -8,6 +8,9 @@ app.set('view engine', 'ejs'); //配置ejs模板引擎,ejs要写在views的文�
 
 app.use(express.static(__dirname + '/public'));  //给public目录下面的文件提供静态web服务的中间件,可以写多个,  http://localhost:3001/css/style.css
 
+// GET /static/style.css etc.配置虚拟目录的静态web服务,即检测到static路由就去public的目录下面找
+// app.use('/static', express.static(__dirname + '/public'));
+
 app.get('/', (req, res) => {
   // res.render('index',{},(err,html)=>{
   // 写了这个回调就要send或rerun
