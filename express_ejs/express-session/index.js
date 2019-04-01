@@ -11,6 +11,8 @@ app.use(session({
   cookie: { 
     // secure: true, //https可以访问cookie
     maxAge:10000, //设置过期时间
+    // 设置30分钟过期的话,只要浏览页面,30分钟就一直重置,直到没有操作后30分钟后才过期
+    rolling:true, //在每次请求时强行设置cookie,这将重置cookie过期时间(默认false)
   }   
 }))
 
@@ -20,9 +22,14 @@ app.get('/set', (req, res) => {
   res.send('设置session成功');
 });
 
+app.get('/loginOut', (req, res) => {
+  // req.session.cookie.maxAge = 0;
+  req.session.destroy(err => console.log(err))
+  res.send('退出成功');
+});
+
 
 app.get('/', (req, res) => {
-  console.log(req.session)
   if (req.session.userinfo) {
     res.send('hello,' + req.session.userinfo)
   }else{
