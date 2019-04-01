@@ -2,7 +2,7 @@ var express = require('express');
 var cookieParser = require('cookie-parser');
 
 var app = express();
-app.use(cookieParser('加密字符串，随意'));  // 配合
+app.use(cookieParser('加密字符串，随意'));  // 配合下方的signed属性加密
 
 app.get('/set', (req, res) => {
   //  属性  值   存在时间
