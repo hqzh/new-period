@@ -1,2 +1,0 @@
-name=hqzh&password=1
-name=hqzh&password=333
