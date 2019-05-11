@@ -71,5 +71,36 @@ app.use(async (ctx, next) => {
   }
 })
 
+class Db {
+  constructor(){
+    console.log('实例化会执行构造函数')
+    this.connect();
+  }
+
+  static getInstance(){  //节省性能,只实例化一次
+    if (!Db.instance) {
+      Db.instance= new Db();
+    }
+    return Db.instance;
+  }
+
+  connect(){
+    console.log('链接数据库')
+  }
+
+  find(){
+    console.log('查询数据库')
+  }
+}
+
+const myDb = Db.getInstance();
+const myDb2 = Db.getInstance();
+const myDb3 = Db.getInstance();
+
+myDb.find();
+myDb2.find();
+myDb3.find();
+
+
 app.use(router.routes())
   .use(router.allowedMethods()).listen(8888);
