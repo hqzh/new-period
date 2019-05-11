@@ -1,9 +1,11 @@
 const koa = require('koa');
 const Router = require('koa-router');
 const views = require('koa-views');
-const common = require('./module/common.js')
+// const common = require('./module/common.js')
+const bodyParser = require('koa-bodyparser');
 const app = new koa();
 const router = new Router();
+app.use(bodyParser());
 
 
 app.use(views(__dirname + '/views', {
@@ -17,8 +19,9 @@ router.get('/', async (ctx, next) => {
 });
 
 router.post('/doAdd', async (ctx, next) => {
-  const data = await common.getPostData(ctx)
-  console.log(data)
+  // const data = await common.getPostData(ctx)
+  // console.log(data)
+  console.log(ctx.request.body)
 });
 
 router.get('/news', (ctx, next) => {
