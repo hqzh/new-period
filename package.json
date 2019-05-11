@@ -1,0 +1,31 @@
+{
+  "name": "new-period",
+  "version": "1.0.0",
+  "description": "koa",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hqzh/new-period.git"
+  },
+  "author": "hqzh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hqzh/new-period/issues"
+  },
+  "homepage": "https://github.com/hqzh/new-period#readme",
+  "dependencies": {
+    "art-template": "^4.13.2",
+    "ejs": "^2.6.1",
+    "koa": "^2.7.0",
+    "koa-art-template": "^1.1.1",
+    "koa-bodyparser": "^4.2.1",
+    "koa-router": "^7.4.0",
+    "koa-session": "^5.11.0",
+    "koa-static": "^5.0.0",
+    "koa-views": "^6.2.0",
+    "mongodb": "^3.2.4"
+  }
+}

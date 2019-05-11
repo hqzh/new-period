@@ -1,0 +1,21 @@
+coverage
+node_modules
+reports
+screenshots
+*.sw*
+*.un~
+.umi
+.umi-production
+.idea
+
+# production
+/dist
+
+# misc
+.DS_Store
+npm-debug.log*
+.vscode
+.ideal
+yarn-error.log
+yarn.lock
+package-lock.json
