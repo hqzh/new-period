@@ -16,6 +16,7 @@ class Db {
 
   constructor() {
     this.dbClient = ""
+    this.connect(); //第一次偷偷给你连上
   }
   connect() {
     return new Promise((resolve, reject) => {
