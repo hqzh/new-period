@@ -3,10 +3,11 @@ const Router = require('koa-router');
 const views = require('koa-views');
 // const common = require('./module/common.js')
 const bodyParser = require('koa-bodyparser');
+const static = require('koa-static');
 const app = new koa();
 const router = new Router();
 app.use(bodyParser());
-
+app.use(static(__dirname + '/static'))  //可配置多个静态托管
 
 app.use(views(__dirname + '/views', {
   map: {
