@@ -7,6 +7,7 @@ const bodyParser = require('koa-bodyparser');
 const static = require('koa-static');
 const path = require('path')
 const session = require('koa-session');
+const DB = require('./module/db.js')
 const app = new koa();
 const router = new Router();
 app.use(bodyParser());
@@ -47,6 +48,8 @@ router.get('/', async (ctx, next) => {
   await ctx.render('index')
   ctx.session.userinfo = 'root';
   console.log(ctx.session.userinfo)
+  const res = await DB.find('koa',{})
+  console.log(res)
 });
 
 router.post('/doAdd', async (ctx, next) => {
