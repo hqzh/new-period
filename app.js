@@ -57,7 +57,7 @@ router.get('/delete', async (ctx, next) => {
     }
   } catch (error) {
     console.log(err);
-    ctx.redirect('/add')
+    ctx.redirect('/')
     return;
   }
 });
@@ -71,7 +71,7 @@ router.post('/doEdit/:aid', async (ctx, next) => {
     }
   } catch (error) {
     console.log(err);
-    ctx.redirect('/add')
+    ctx.redirect('/edit')
     return;
   }
 });
