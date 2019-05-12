@@ -5,7 +5,9 @@ const bodyParser = require('koa-bodyparser');
 const static = require('koa-static');
 const path = require('path')
 const session = require('koa-session');
-const DB = require('./module/db.js')
+const admin = require('./routes/admin');  //引入路由子模块
+const api = require('./routes/api');  //引入路由子模块
+const index = require('./routes/index');  //引入路由子模块
 const app = new koa();
 const router = new Router();
 app.use(bodyParser());
@@ -31,63 +33,10 @@ const CONFIG = {
 };
 
 app.use(session(CONFIG, app));
+router.use('/admin',admin)
+router.use('/api',api)
+router.use(index)
 
-
-
-router.get('/', async (ctx, next) => {
-  const data = await DB.find('koa', {})
-  await ctx.render('index', { data })
-});
-
-router.get('/add', async (ctx, next) => {
-
-  await ctx.render('add')
-});
-
-router.get('/edit', async (ctx, next) => {
-  const result = await DB.find('koa', { "_id": DB.getObjectId(ctx.query.id) })
-  await ctx.render('edit', { data: result[0] })
-});
-
-router.get('/delete', async (ctx, next) => {
-  const data = await DB.remove('koa', { "_id": DB.getObjectId(ctx.query.id) })
-  try {
-    if (data.result.ok) {
-      ctx.redirect('/')
-    }
-  } catch (error) {
-    console.log(err);
-    ctx.redirect('/')
-    return;
-  }
-});
-
-router.post('/doEdit/:aid', async (ctx, next) => {
-  const preData = await DB.find('koa', { "_id": DB.getObjectId(ctx.params.aid) })
-  const data = await DB.update('koa', preData[0], ctx.request.body)
-  try {
-    if (data.result.ok) {
-      ctx.redirect('/')
-    }
-  } catch (error) {
-    console.log(err);
-    ctx.redirect('/edit')
-    return;
-  }
-});
-
-router.post('/doAdd', async (ctx, next) => {
-  const data = await DB.insert('koa', ctx.request.body)
-  try {
-    if (data.result.ok) {
-      ctx.redirect('/')
-    }
-  } catch (error) {
-    console.log(err);
-    ctx.redirect('/add')
-    return;
-  }
-});
 
 app.use(async (ctx, next) => {
   ctx.session.userinfo = 'hqzh'
