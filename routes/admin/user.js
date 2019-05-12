@@ -2,8 +2,12 @@ const Router = require('koa-router');
 
 const router = new Router();
 
-router.get('/', async (ctx) => {
-  await ctx.render('admin/user/index')
+router.get('/', (ctx) => {
+  ctx.body = '接口'
+})
+
+router.get('/add', (ctx) => {
+  ctx.body = '增加接口'
 })
 
 
