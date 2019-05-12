@@ -2,16 +2,34 @@
 <html lang="en">
   <head>
     <title></title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="css/basic.css" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="css/basic.css" rel="stylesheet" />
   </head>
   <body>
-    <h1 class="header"><%=useinfo%></h1>
-    <form action="/doAdd" method="post">
-      <input type="text" name="username" />
-      <input type="submit" value="提交">
-    </form>
-    <img src="img/1.gif" alt="rock">
+    <h1 class="header">{{ useinfo }}</h1>
+    <a href="/add">增加</a>
+    <br>
+    <table width="100%" border="1" cellspacing="0">
+        <tr>
+          <th>姓名</th>
+          <th>年龄</th>
+          <th>性别</th>
+          <th>操作</th>
+        </tr>
+        {{each data}}
+        <tr>
+          <td>{{$value.name}}</td>
+          <td>{{$value.age}}</td>
+          <td>{{$value.sex}}</td>
+          <td>
+            <a href="#">删除</a>
+            <a href="#">编辑</a>
+          </td>
+        </tr>
+        {{/each}}
+      </table>
+
+    <img src="img/1.gif" alt="rock" />
   </body>
-</html>   
+</html>
