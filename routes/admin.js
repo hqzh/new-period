@@ -10,7 +10,7 @@ router.use(async (ctx, next) => {
     // 匹配到中间件往下走
     await next();
   } else {
-    if (ctx.url === '/admin/login' || ctx.url === '/admin/login/doLogin') {
+    if (ctx.url === '/admin/login' || ctx.url === '/admin/login/doLogin' || ctx.url === '/admin/login/code') {
       await next();
     } else {
       ctx.redirect('/admin/login')
