@@ -46,8 +46,20 @@ router.get('/add', async (ctx, next) => {
 
 router.get('/edit', async (ctx, next) => {
   const result = await DB.find('koa', { "_id": DB.getObjectId(ctx.query.id) })
-  console.log(result[0])
   await ctx.render('edit', { data: result[0] })
+});
+
+router.get('/delete', async (ctx, next) => {
+  const data = await DB.remove('koa', { "_id": DB.getObjectId(ctx.query.id) })
+  try {
+    if (data.result.ok) {
+      ctx.redirect('/')
+    }
+  } catch (error) {
+    console.log(err);
+    ctx.redirect('/add')
+    return;
+  }
 });
 
 router.post('/doEdit/:aid', async (ctx, next) => {
