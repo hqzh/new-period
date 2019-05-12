@@ -1,4 +1,4 @@
-const MongoClient = require('mongodb').MongoClient;
+const { MongoClient, ObjectID } = require('mongodb');
 const assert = require('assert');
 const Config = require('./congfig.js');
 
@@ -95,6 +95,10 @@ class Db {
         })
       })
     })
+  }
+
+  getObjectId(id){
+    return new ObjectID(id)  //处理MongoDB的id格式
   }
 
 }

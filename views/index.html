@@ -24,7 +24,8 @@
           <td>{{$value.sex}}</td>
           <td>
             <a href="#">删除</a>
-            <a href="#">编辑</a>
+            <!-- 加@表示原封不动传数据,看art文档,_id为MongoDB生成的id -->
+            <a href="/edit?id={{@$value._id}}">编辑</a>
           </td>
         </tr>
         {{/each}}

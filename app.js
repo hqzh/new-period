@@ -36,16 +36,23 @@ app.use(session(CONFIG, app));
 
 router.get('/', async (ctx, next) => {
   const data = await DB.find('koa', {})
-  await ctx.render('index',{data})
+  await ctx.render('index', { data })
 });
 
 router.get('/add', async (ctx, next) => {
- 
+
   await ctx.render('add')
 });
 
-router.post('/doAdd', async (ctx, next) => {
-  const data = await DB.insert('koa',ctx.request.body)
+router.get('/edit', async (ctx, next) => {
+  const result = await DB.find('koa', { "_id": DB.getObjectId(ctx.query.id) })
+  console.log(result[0])
+  await ctx.render('edit', { data: result[0] })
+});
+
+router.post('/doEdit/:aid', async (ctx, next) => {
+  const preData = await DB.find('koa', { "_id": DB.getObjectId(ctx.params.aid) })
+  const data = await DB.update('koa', preData[0], ctx.request.body)
   try {
     if (data.result.ok) {
       ctx.redirect('/')
@@ -55,13 +62,19 @@ router.post('/doAdd', async (ctx, next) => {
     ctx.redirect('/add')
     return;
   }
-  
 });
 
-
-
-router.get('/newscontent/:aid', (ctx, next) => {
-  ctx.body = ctx.params.aid;
+router.post('/doAdd', async (ctx, next) => {
+  const data = await DB.insert('koa', ctx.request.body)
+  try {
+    if (data.result.ok) {
+      ctx.redirect('/')
+    }
+  } catch (error) {
+    console.log(err);
+    ctx.redirect('/add')
+    return;
+  }
 });
 
 app.use(async (ctx, next) => {
