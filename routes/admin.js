@@ -3,15 +3,23 @@ const Router = require('koa-router');
 const router = new Router();
 
 // 配置中间件,获取url地址
-router.use(async (ctx,next) => {
+router.use(async (ctx, next) => {
   //配置模板引擎的全局变量
   ctx.state.__HOST__ = `http://${ctx.request.header.host}`;
-  // 匹配到中间件往下走
-  await next();
+  if (ctx.session.userinfo) {
+    // 匹配到中间件往下走
+    await next();
+  } else {
+    if (ctx.url === '/admin/login' || ctx.url === '/admin/login/doLogin') {
+      await next();
+    } else {
+      ctx.redirect('/admin/login')
+    }
+  }
 })
 
-router.get('/', (ctx) => {
-  ctx.body = '接口'
+router.get('/', async (ctx) => {
+  await ctx.render('admin/index')
 })
 
 router.use('/login', require('./admin/login'))
