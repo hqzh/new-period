@@ -90,7 +90,8 @@ router.post('/doAdd', async (ctx, next) => {
 });
 
 app.use(async (ctx, next) => {
-  ctx.state.useinfo = 'hqzh'  //设置ejs全局属性
+  ctx.session.userinfo = 'hqzh'
+  ctx.state.useinfo = ctx.session.userinfo  //设置ejs全局属性
   await next();
   if (ctx.status === 404) {
     ctx.body = '404'
