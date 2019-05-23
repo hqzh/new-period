@@ -10,6 +10,7 @@ router.get('/', async (ctx) => {
 })
 
 router.post('/doLogin', async (ctx) => {
+  // 最好先验证下用户名和密码是否合法，避免sql注入
   const { username, password } = ctx.request.body
   const result = await DB.find('user', { "username": username, "password": tools.md(password) })
   const {code} = ctx.request.body;
