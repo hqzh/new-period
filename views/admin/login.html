@@ -13,7 +13,17 @@
 		<!-- fonts -->
 		<link rel="stylesheet" href="{{__HOST__}}/admin/css/ace.min.css" />
 		<link rel="stylesheet" href="{{__HOST__}}/admin/css/ace-rtl.min.css" />
-		
+		<script src='{{__HOST__}}/admin/js/jquery-2.0.3.min.js'></script>
+		<script>
+			$(function () {
+				$("#code").click(function () {
+					$(this).attr('src','{{__ROOT__}}/admin/login/code?t='+Math.random()*1000)
+				})
+				$("#loginForm").submit(function () {
+					// 验证值
+				})
+			})
+		</script>
 		<style type="text/css">
 			.login-layout{
 				background: #428bca;
@@ -30,6 +40,9 @@
 			.header{
 				margin-top:0px;
 				padding-bottom: 12px;
+			}
+			#code{
+				cursor: pointer;
 			}
 		</style>
 	
@@ -54,7 +67,7 @@
 
 											<div class="space-6"></div>
 
-											<form action="{{__HOST__}}/admin/login/doLogin" method="post">
+											<form action="{{__HOST__}}/admin/login/doLogin" method="post" id='loginForm'>
 												<fieldset>
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
@@ -72,8 +85,8 @@
 
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="password" class="form-control" placeholder="验证吗" style="width:200px;float:left;" />
-															<img style="float:right;" src="{{__HOST__}}/admin/login/code" alt="">
+															<input type="code" name="code" class="form-control" placeholder="验证吗" style="width:200px;float:left;" />
+															<img style="float:right;" id="code" src="{{__HOST__}}/admin/login/code" alt="">
 														</span>
 													</label>
 

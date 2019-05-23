@@ -11,22 +11,40 @@ router.get('/', async (ctx) => {
 
 router.post('/doLogin', async (ctx) => {
   const { username, password } = ctx.request.body
-  const result =await DB.find('user',{"username":username,"password":tools.md(password)})
+  const result = await DB.find('user', { "username": username, "password": tools.md(password) })
+  const {code} = ctx.request.body;
   console.log(result)
-  if (result.length) {
-    ctx.session.userinfo = result[0].username;
-    ctx.redirect('/admin')
+  console.log(ctx.session.code)
+  if (code === ctx.session.code) {
+    if (result.length) {
+      ctx.session.userinfo = result[0].username;
+      ctx.redirect('/admin')
+    } else {
+      console.log('失败')
+    }
   }else{
-    console.log('失败')
+    console.log("验证码失败")
+    ctx.render('admin/error',{
+      message:'验证码错误',
+      redirect:ctx.state.__HOST__+'/admin/login'
+    })
   }
+  
 })
 
 router.get('/code', async (ctx) => {
-  const captcha = svgCaptcha.create({color: true ,
-    background: '#cc9966' });
+  const captcha = svgCaptcha.create({
+    color: true,
+    background: '#cc9966',
+    width: 120,
+    height: 34
+  });
+  // 保存生成的验证码
+  ctx.session.code = captcha.text;
   console.log(captcha.text)
-  ctx.response.type='image/svg+xml'  
- ctx.body=captcha.data
+  // 设置响应头
+  ctx.response.type = 'image/svg+xml'
+  ctx.body = captcha.data
 })
 
 module.exports = router.routes();  //暴露并且启动路由
